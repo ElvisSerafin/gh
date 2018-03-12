@@ -135,11 +135,7 @@ and open the template in the editor.
 					checkeados=false
 					return false;
 				}
-				
-				
 			});
-			
-		
 			//alert(checkeados);
 					if(checkeados==true){//Si estan checkeados todos los checkbox y radio de la tabla
 						$('#mensaje_' + tabla).html('El formulario ha sido completado')
@@ -180,7 +176,7 @@ and open the template in the editor.
 					}								
 
 				}
-				
+		
 				function padre_radio(){
 					var padre = $(this).attr('name');
 					setTimeout(function(){
@@ -211,32 +207,31 @@ and open the template in the editor.
 
 				function bloquearAnestesia(){  
 					$("#grb_anestesia").click(function(){
-     $('#anestesia input:checkbox, #anestesia input:radio, #anestesia input:text').attr('disabled',true);
-     $('#conf_antes input:checkbox').attr('disabled',true);
-     $('#segu_anestesica input:checkbox').attr('disabled',true);
-});
-	
+                                        $('#anestesia input:checkbox, #anestesia input:radio, #anestesia input:text').attr('disabled',true);
+                                        $('#conf_antes input:checkbox').attr('disabled',true);
+                                        $('#segu_anestesica input:checkbox').attr('disabled',true);
+                                                                             });
 
-				}
+				                             }
 
 				function bloquearIncision(){
 					$("#grb_incision").click(function(){
-     $('#incision input:checkbox,#incision input:radio,#incision input:text').attr('disabled',true);
-     $('#confirm_verbal input:checkbox').attr('disabled',true);
-     $('#prev_event input:checkbox').attr('disabled',true);
-});
-				}
+                                        $('#incision input:checkbox,#incision input:radio,#incision input:text').attr('disabled',true);
+                                        $('#confirm_verbal input:checkbox').attr('disabled',true);
+                                        $('#prev_event input:checkbox').attr('disabled',true);
+                                                                            });
+				                            }
 				function bloquearQuirofano(){
 					$("#grb_quirofano").click(function(){
-     $('#quirofano input:checkbox,#quirofano input:radio,#quirofano input:text').attr('disabled',true);
-});
-				}
+                                        $('#quirofano input:checkbox,#quirofano input:radio,#quirofano input:text').attr('disabled',true);
+                                                                            });
+				                              }
 				function bloquearRecuperacion(){
 					$("#grb_recuperacion").click(function(){
-     $('#recuperacion input:checkbox,#recuperacion input:radio,#recuperacion input:text').attr('disabled',true);
-     $('#confirm_estado input:checkbox').attr('disabled',true);
-});
-				}
+                                        $('#recuperacion input:checkbox,#recuperacion input:radio,#recuperacion input:text').attr('disabled',true);
+                                        $('#confirm_estado input:checkbox').attr('disabled',true);
+                                                                                });
+				                                }
 
 				function valor_chk(){
 					var nombre;
