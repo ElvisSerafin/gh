@@ -4,147 +4,137 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
-    <head>
-        <link href="css/style2_ie.css" rel="stylesheet" type="text/css"/>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head>
+	<link href="css/style2_ie.css" rel="stylesheet" type="text/css"/>
         <link href="css/facebox.css" rel="stylesheet" type="text/css"/>
         <link href="css/jquery-ui_lightness.css" rel="stylesheet" type="text/css"/> 
         <script src="js/facebox.js" type="text/javascript"></script>
         <script src="js/jquery-1.6.1.js" type="text/javascript"></script>
         <script src="js/jquery-ui2.js" type="text/javascript"></script>
         <script src="js/jquery.tipsy.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            var siguiente = {"anestesia": {sig: "incision"},
-                "incision": {sig: "quirofano"},
-                "quirofano": {sig: "recuperacion"},
-                "recuperacion": {sig: "imprimir"}};
-            $(function () {
-                $('#alerg_text_si').hide();
-                $('#dispo_equipo_no').hide();
-                $('#profil_text_si').hide();
-                $('#equipoEnf').hide();
-                $('#instru_prob_text').hide();
-                $('#dispo_equipo_text').hide();
+	<script type="text/javascript">  
+		var siguiente = {"anestesia":{sig:"incision"},
+		"incision":{sig:"quirofano"},
+		"quirofano":{sig:"recuperacion"},
+		"recuperacion":{sig:"imprimir"}};
+		$(function(){
+			$('#alerg_text_si').hide();
+			$('#dispo_equipo_no').hide();
+			$('#profil_text_si').hide();
+			$('#equipoEnf').hide();
+			$('#instru_prob_text').hide();
+			$('#dispo_equipo_text').hide();
 
-                valor_chk();
-                //$('.padre').attr('disabled',true);
-                $('.det_chk input:checkbox').click(padre_chk);
-                $('.det_radio input:radio').click(padre_radio);
-                $('.grabar').click(grabar);
-                $('#tabs').tabs();
-                $('#tabla_seguridad input:checkbox,#tabla_seguridad input:radio').click(function () {
-                    var tabla = $(this).attr('class');
-                    if ($(this).attr('type') == 'radio'){
-                        tabla = $(this).attr('class').substring(2);
-                    }else{
+			valor_chk();
+					//$('.padre').attr('disabled',true);
+					$('.det_chk input:checkbox').click(padre_chk);
+					$('.det_radio input:radio').click(padre_radio);
+					$('.grabar').click(grabar);
+					$('#tabs').tabs();
+					$('#tabla_seguridad input:checkbox,#tabla_seguridad input:radio').click(function(){
+						var tabla = $(this).attr('class');
+						if($(this).attr('type')=='radio'){tabla = $(this).attr('class').substring(2);
+							//alert(tabla);
+						}else{
                         var tmp = tabla.split(" ");
                         if(tmp.length === 2){
                             tabla=tmp[1];
                         }
-                    }                        
-                    //alert(tabla);
-                    setTimeout(function () {
-                        verificar(tabla);
-                    }, 400);
-                    ;
-                    mostrar_imprimir();
-                });
-                $('#tabla_incision input:checkbox,#tabla_incision input:radio').attr('disabled', true);
-                $('#tabla_quirofano input:checkbox,#tabla_quirofano input:radio').attr('disabled', true);
-                $('#tabla_recuperacion input:checkbox').attr('disabled', true);
-                $('.tablas').each(function (index, element) {
-                    $(this).find('input:checkbox').addClass($(this).attr('id').substring(6));
-                    $(this).find('input:radio').addClass('r_' + $(this).attr('id').substring(6));
-                });
-
-                $.each(siguiente, function (index, element) {
-                    verificar(index);
-                });
-
-                $('#imprimir').click(function () {
-                    window.location = 'print_seguridad.jsp?id_regdia=18021405030200585750';
-                });
-                $('input:button').button();
-                mostrar_imprimir();
-                $('.firma').click(function () {
-                    $.facebox({ajax: 'form_cambiar_firma.jsp?id_regdia=18021405030200585750&firma=' + $(this).attr('id')})
-                });
-                $('#cirujano').attr('src', '../../firmas/1133803764231.jpg');
-                $('#anest_quiro').attr('src', '../../firmas/1517929193481.jpg');
-                $('#enfermero_quiro').attr('src', '../../firmas/1133803764231.jpg');
-                $('#verificador').attr('src', '../../firmas/1133803764231.jpg');
-                $('#anest_post').attr('src', '../../firmas/1133803764231.jpg');
-                $('#enfermero_post').attr('src', '../../firmas/1133803764231.jpg');
+                    }  
+							setTimeout(function(){verificar(tabla)},400);;
+							mostrar_imprimir();
+																});
+					$('#tabla_incision input:checkbox,#tabla_incision input:radio').attr('disabled',true);
+					$('#tabla_quirofano input:checkbox,#tabla_quirofano input:radio').attr('disabled',true);
+					$('#tabla_recuperacion input:checkbox').attr('disabled',true);
+					$('.tablas').each(function(index, element) {
+						$(this).find('input:checkbox').addClass($(this).attr('id').substring(6));
+						$(this).find('input:radio').addClass('r_' + $(this).attr('id').substring(6));
+					});
+					
+					$.each(siguiente,function(index, element) {
+						verificar(index);
+					});
+					
+					$('#imprimir').click(function(){window.location='print_seguridad.jsp?id_regdia=18021216090648398096';});
+					$('input:button').button();
+					mostrar_imprimir();
 
 
-                $('#conf_antes').click(function () {
-                    if ($(this).is(':checked')) {
+                // if (rset.next && rset.getString("existe").equals('1')) {
+                    $('.firma').click(function(){$.facebox({ajax:'form_cambiar_firma.jsp?id_regdia=18021216090648398096&firma=' + $(this).attr('id')})});
+                    $('#cirujano').attr('src','../../firmas/1133803764231.jpg');$('#anest_quiro').attr('src','../../firmas/1517929193481.jpg');$('#enfermero_quiro').attr('src','../../firmas/1517929193481.jpg');$('#verificador').attr('src','../../firmas/1517929193481.jpg');
+				//}else{
+					//$('.firma').click(function(){$.facebox({ajax:'yafirmo.jsp?id_regdia=18021216090648398096&firma=' + $(this).attr('id')})});
+				//}
 
-                        $('.conf_antes').attr('checked', true);
-                    } else {
-                        $('.conf_antes').attr('checked', false);
-                    }
-                });
+					$('#conf_antes').click(function() {
+						if ($(this).is(':checked') ) {
 
-                $('#segu_anestesica').click(function () {
-                    if ($(this).is(':checked')) {
+							$('.conf_antes').attr('checked',true);
+						} else {
+							$('.conf_antes').attr('checked',false);
+						}
+					});
 
-                        $('.segu_anestesica').attr('checked', true);
-                    } else {
-                        $('.segu_anestesica').attr('checked', false);
-                    }
-                });
+					$('#segu_anestesica').click(function() {
+						if ($(this).is(':checked') ) {
 
-                $('#confirm_verbal').click(function () {
-                    if ($(this).is(':checked')) {
+							$('.segu_anestesica').attr('checked',true);
+						} else {
+							$('.segu_anestesica').attr('checked',false);
+						}
+					});
 
-                        $('.confirm_verbal').attr('checked', true);
-                    } else {
-                        $('.confirm_verbal').attr('checked', false);
-                    }
-                });
+					$('#confirm_verbal').click(function() {
+						if ($(this).is(':checked') ) {
 
-                $('#prev_event').click(function () {
-                    if ($(this).is(':checked')) {
+							$('.confirm_verbal').attr('checked',true);
+						} else {
+							$('.confirm_verbal').attr('checked',false);
+						}
+					});
 
-                        $('.prev_event').attr('checked', true);
-                    } else {
-                        $('.prev_event').attr('checked', false);
-                    }
-                });
+					$('#prev_event').click(function() {
+						if ($(this).is(':checked') ) {
 
-                $('#confirm_estado').click(function () {
-                    if ($(this).is(':checked')) {
+							$('.prev_event').attr('checked',true);
+						} else {
+							$('.prev_event').attr('checked',false);
+						}
+					});
 
-                        $('.confirm_estado').attr('checked', true);
-                    } else {
-                        $('.confirm_estado').attr('checked', false);
-                    }
-                });
+					$('#confirm_estado').click(function() {
+						if ($(this).is(':checked') ) {
+
+							$('.confirm_estado').attr('checked',true);
+						} else {
+							$('.confirm_estado').attr('checked',false);
+						}
+					});
 
 
-            });
+				});
 
-            function mostrar_imprimir() {
-                var chk_todos = true
-                setTimeout(function () {
-                    $('#tabla_seguridad input:checkbox').each(function (index, element) {
-                        if ($(this).is(':checked') == false) {
-                            chk_todos = false
-                            return false;
-                        }
-                    });
-                    if (chk_todos) {
-                        $('#imprimir').show();
-
-                    } else {
-                        $('#imprimir').hide();
-
-                    }
-                }, 200);
-            }
-
-            function verificar(tabla) {
+		function mostrar_imprimir(){
+			var chk_todos = true
+			setTimeout(function(){
+				$('#tabla_seguridad input:checkbox').each(function(index, element) {
+					if($(this).is(':checked')==false){
+						chk_todos=false
+						return false;
+					}
+				});
+				if(chk_todos){
+					$('#imprimir').show();
+					
+				}else{
+					$('#imprimir').hide();
+					
+				}
+			},200);
+		}
+		function verificar(tabla) {
                 var checkeados = true;
                 var pruex = $('#ident_pac').val();
                 $('.' + tabla).each(function (index, element) {
@@ -155,7 +145,7 @@ and open the template in the editor.
                     }
                 });
                 //alert(checkeados);
-                if (checkeados === true) {//Si estan checkeados todos los checkbox y radio de la tabla
+                if (checkeados == true) {//Si estan checkeados todos los checkbox y radio de la tabla
                     $('#mensaje_' + tabla).html('El formulario ha sido completado')
                             .addClass('mensaje2');
                     if ($('#' + siguiente[tabla].sig + ' input:checkbox').length > 0) {
@@ -176,782 +166,812 @@ and open the template in the editor.
                     $.each(siguiente, function (key, val) {
                         if ((key == tabla || sig == true) && key != 'recuperacion') {
                             sig = true;
-                            $('#tabla_' + siguiente[key].sig + ' input:checkbox,#tabla_' + siguiente[key].sig + ' input:radio,#tabla_' + siguiente[key].sig + ' input:text').attr('disabled', true);
+                            $('#tabla_' + siguiente[key].sig + ' input:checkbox,#tabla_' + siguiente[key].sig + ' input:radio').attr('disabled', true);
                         }
                     });
                 }
             }
+				
+				function padre_chk(){
+					var checkeado=true;
+					var grupo = $(this).parent().parent().parent().parent().parent().attr('id').substring(4);
+					$.each($('#det_' + grupo + ' input:checkbox'),function(){
+						if($(this).is(':checked')==false)
+							checkeado=false;
+					});
+					if($('#' + grupo).is(':checked')!=checkeado){
+						$('#' + grupo).attr('checked',checkeado);
+						var valor = checkeado==true?'1':'0';
+					}								
 
-            function padre_chk() {
-                var checkeado = true;
-                var grupo = $(this).parent().parent().parent().parent().parent().attr('id').substring(4);
-                $.each($('#det_' + grupo + ' input:checkbox'), function () {
-                    if ($(this).is(':checked') == false)
-                        checkeado = false;
-                });
-                if ($('#' + grupo).is(':checked') != checkeado) {
-                    $('#' + grupo).attr('checked', checkeado);
-                    var valor = checkeado == true ? '1' : '0';
-                }
+				}
+				
+				function padre_radio(){
+					var padre = $(this).attr('name');
+					setTimeout(function(){
+						var valor 		= $("input[name=" + padre + "]:checked").val();
+						if(valor!=null){
+							$('#padre_' + padre).attr('checked',true);
+						}
+					},100);
+				}
+				
+				function grabar(){
+					if ($("#grb_anestesia").is(':button')) { 
+$("#tabla_anestesia").attr('disabled', true);
 
-            }
+                                              }
+					var tabla = $(this).attr('id').substring(4);
+					$('.padre').removeAttr('disabled');
+					$('#tabla').val(tabla);
+					$.post('guardar_seguridad.jsp',
+						$('#datos').serialize(),
+						function(data){
+							$('.padre').attr('disabled',false);
+							$('#mensaje_' + tabla).html('Los datos han sido guardados satisfactoriamente');
+							if($('#' + siguiente[tabla].sig + ' input:checkbox').length>0){
+								$('#' + siguiente[tabla].sig + ' input:checkbox,#' + siguiente[tabla].sig + ' input:radio').removeAttr('disabled');
+								$('.padre').attr('disabled',false);
+							}
+							$('#grb_' + tabla).hide();
+						}
+						);	
+				}
 
-            function padre_radio() {
-                var padre = $(this).attr('name');
-                setTimeout(function () {
-                    var valor = $("input[name=" + padre + "]:checked").val();
-                    if (valor != null) {
-                        $('#padre_' + padre).attr('checked', true);
-                    }
-                }, 100);
-            }
+				function bloquearAnestesia(){  
+					$("#grb_anestesia").click(function(){
+     $('#anestesia input:checkbox, #anestesia input:radio, #anestesia input:text').attr('disabled',true);
+     $('#conf_antes input:checkbox').attr('disabled',true);
+     $('#segu_anestesica input:checkbox').attr('disabled',true);
+});
+	
 
-            function grabar() {
-                var tabla = $(this).attr('id').substring(4);
-                $('.padre').removeAttr('disabled');
-                $('#tabla').val(tabla);
-                $.post('guardar_seguridad.jsp',
-                        $('#datos').serialize(),
-                        function (data) {
-                            $('.padre').attr('disabled', false);
-                            $('#mensaje_' + tabla).html('Los datos han sido guardados satisfactoriamente');
-                            if ($('#' + siguiente[tabla].sig + ' input:checkbox').length > 0) {
-                                $('#' + siguiente[tabla].sig + ' input:checkbox,#' + siguiente[tabla].sig + ' input:radio').removeAttr('disabled');
-                                $('.padre').attr('disabled', false);
-                            }
-                            $('#grb_' + tabla).hide();
-                        }
-                );
-            }
+				}
 
-            function bloquearAnestesia() {
-                $("#grb_anestesia").click(function () {
-                    $('#anestesia input:checkbox, #anestesia input:radio, #anestesia input:text').attr('disabled', true);
-                    $('#conf_antes input:checkbox').attr('disabled', true);
-                    $('#segu_anestesica input:checkbox').attr('disabled', true);
-                });
+				function bloquearIncision(){
+					$("#grb_incision").click(function(){
+     $('#incision input:checkbox,#incision input:radio,#incision input:text').attr('disabled',true);
+     $('#confirm_verbal input:checkbox').attr('disabled',true);
+     $('#prev_event input:checkbox').attr('disabled',true);
+});
+				}
+				function bloquearQuirofano(){
+					$("#grb_quirofano").click(function(){
+     $('#quirofano input:checkbox,#quirofano input:radio,#quirofano input:text').attr('disabled',true);
+});
+				}
+				function bloquearRecuperacion(){
+					$("#grb_recuperacion").click(function(){
+     $('#recuperacion input:checkbox,#recuperacion input:radio,#recuperacion input:text').attr('disabled',true);
+     $('#confirm_estado input:checkbox').attr('disabled',true);
+});
+				}
 
-            }
+				function valor_chk(){
+					var nombre;
+					$('#conf_antes').attr('checked',true);
+					$('#ident_pac').attr('checked',true);
+					$('#procedimiento').attr('checked',true);
+					$('#lugar_anato').attr('checked',true);
+					$('#consentimiento').attr('checked',true);
+					$("input:radio[name='demarcacion'][value='1']").attr('checked',true);
+					$('#segu_anestesica').attr('checked',true);
+					$('#pac_evaluado').attr('checked',true);
+					$('#operativo').attr('checked',true);
+					$('#oxigeno').attr('checked',true);
+					$('#equip_intu').attr('checked',true);
+					$('#aspiracion').attr('checked',true);
+					$('#farmacos').attr('checked',true);
+					$('#coche_paro').attr('checked',true);
+					$('#equipo_rcp').attr('checked',true);
+					$('#pulso').attr('checked',true);
+					$("input:radio[name='alergias'][value='1']").attr('checked',true);
+					$("input:radio[name='via_aerea'][value='1']").attr('checked',true);
+					$("input:radio[name='riesgo_hemo'][value='1']").attr('checked',true);
+					$("input:radio[name='dispo_sangre'][value='1']").attr('checked',true);
+					$("input:radio[name='dispo_equipo'][value='1']").attr('checked',true);
+					$('#presentacion').attr('checked',true);
+					$('#confirm_verbal').attr('checked',true);
+					$('#confirm_ident_pac').attr('checked',true);
+					$('#confirm_procedimiento').attr('checked',true);
+					$('#confirm_lugar_anato').attr('checked',true);
+					$('#confirm_posicion').attr('checked',true);
+					$('#confirm_equip').attr('checked',true);
+					$("input:radio[name='profilaxis'][value='1']").attr('checked',true);				
+					$('#prev_event').attr('checked',true);
+					$('#prev_cirujano').attr('checked',true);
+					$('#prev_anest').attr('checked',true);
+					$('#prev_equip').attr('checked',true);
+					$("input:radio[name='imagenes'][value='1']").attr('checked',true);
+					$('#conf_nom_proc').attr('checked',true);
+					$('#rec_gasas').attr('checked',true);
+					$('#lectura_etiqueta').attr('checked',true);
+					$("input:radio[name='instrumental'][value='O']").attr('checked',true);
+					$('#test_escalas').attr('checked',true);
+					$('#confirm_estado').attr('checked',true);
+					$('#no_riesgos').attr('checked',true);
+					$('#vent_adecuada').attr('checked',true);
+					$('#no_necesidad_moni').attr('checked',true);
+					$('#recu_efectos').attr('checked',true);
+					$('#prob_postope').attr('checked',true);
+					$('#rev_riesgos_pot').attr('checked',true);
+					$('#tabla_seguridad input:radio').each(function(index, element) {
+						if(nombre!=$(this).attr('name')){
+							nombre=$(this).attr('name');
+							if($("input[name='" + nombre +  "']:checked").val()!=null){
+								$('#padre_' + nombre).attr('checked',true);
+							}
+						}
+					});
+				}
+				
+			</script>		
+			<style type="text/css">
+			label{
+				cursor:pointer;
+				color:#000000;
+			}
+			.subtitulo{
+				border-bottom:#315287 solid 1px;
+			}
+			.etiqueta{
+				font-weight:bold;
+			}
+			.mensaje{
+				color:#f00;
+				font-weight:bold;
+				text-align:center;
+			}
+			.mensaje2{
+				color:#0C3;
+				font-weight:bold;
+				text-align:center;
+			}
+			.firma{
+				cursor:pointer
+			}
+		</style>
+	</head>	
+	<body>
+		<table width="700px" style="background-color:#F2F2F2;border:1px solid #000" align="center" id="tabla_seguridad">
+			<tbody><tr>
+				<td class="titulo">LISTA DE VERIFICACION DE SEGURIDAD DE LA CIRUGIA</td>
+			</tr>
+			<tr>
+				<td>
+					<table width="100%">
+						<tbody><tr>
+							<td class="etiqueta" width="80px">Paciente</td>
+							<td>LLANOS MUNOZ  QUEMI JANET</td>
+							<td class="etiqueta" width="80px">NHC</td>
+							<td>0367997</td>
+						</tr>
+						<tr>
+							<td class="etiqueta" width="80px">Fecha</td>
+							<td>13/03/2018</td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<form id="datos">
+						<input type="hidden" name="tabla" id="tabla" value="">
+						<input type="hidden" name="id_reg" value="18031311200589189474">
+						<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+							<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+								<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#anestesia" id="ir_anestesia">Antes Anestesia</a></li>
+								<li class="ui-state-default ui-corner-top"><a href="#incision" id="ir_incision">Antes Incisión</a></li>
+								<li class="ui-state-default ui-corner-top"><a href="#quirofano" id="ir_quirofano">Antes Salida Quirófano</a></li>
+								<li class="ui-state-default ui-corner-top"><a href="#recuperacion" id="ir_recuperacion">Antes Salida Recuperación</a></li>
+							</ul>
+							<div id="anestesia" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+								
+								<table width="100%" id="tabla_anestesia" class="tablas">
+									<tbody><tr id="mensaje_anestesia" class="mensaje2">El formulario ha sido completado</tr>
+									<tr>
+										<td>
+											<table width="100%" cellpadding="0" cellspacing="0">
+												<tbody><tr>
+													<td width="50%">
+														<table>
+															<tbody><tr>
+																<td><input type="checkbox" value="1" id="conf_antes" name="conf_antes" disabled="disabled" checked="checked" class="anestesia"></td>
+																<td><label for="conf_antes"><strong>SE HA CONFIRMADO</strong></label></td>
+															</tr>	
+															<tr>
+																<td></td>
+																<td id="det_conf_antes" class="det_chk">
+																	<table cellpadding="0" cellspacing="0" id="table">
+																		<tbody><tr id="tr">
+																			<td id="">
+																				<input type="checkbox" value="1" id="ident_pac" name="ident_pac" class="conf_antes anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="ident_pac">Identidad del paciente</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="procedimiento" name="procedimiento" class="conf_antes anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="procedimiento">El procedimiento</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="lugar_anato" name="lugar_anato" class="conf_antes anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="lugar_anato">Lugar anatómico</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="consentimiento" name="consentimiento" class="conf_antes anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="consentimiento">Consentimiento informado</label></td>
+																		</tr>
+																		
+																	</tbody></table>
+																</td>
+															</tr>
+															<tr>
+																<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_demarcacion" name="padre_demarcacion" class="padre anestesia" disabled="disabled" hidden="" checked="checked"></td>
+																<td><label for="demarcacion"><strong>DEMARCACIÓN DE SITIO</strong></label></td>
+															</tr>
+															<tr>
+																<td></td>
+																<td class="det_radio">
+																	<table cellpadding="0" cellspacing="0">
+																		<tbody><tr>
+																			<td><input type="radio" id="demarcacion_1" name="demarcacion" value="1" disabled="disabled" checked="checked" class="r_anestesia"></td>
+																			<td><label for="demarcacion_1">Si</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="radio" id="demarcacion_0" name="demarcacion" value="0" disabled="disabled" class="r_anestesia"></td>
+																			<td><label for="demarcacion_0">No</label></td>
+																		</tr>
+																	</tbody></table>
+																</td>
+															</tr>
+															<tr>
+																<td><input type="checkbox" value="1" id="segu_anestesica" name="segu_anestesica" disabled="disabled" checked="checked" class="anestesia"></td>
+																<td><label for="segu_anestesica"><strong>SEGURIDAD ANESTÉSICA COMPLETA</strong></label></td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="det_segu_anestesica" class="det_chk">
+																	<table cellpadding="0" cellspacing="0">
+																		<tbody><tr>
+																			<td><input type="checkbox" value="1" id="pac_evaluado" name="pac_evaluado" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="pac_evaluado">Paciente evaluado</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="operativo" name="operativo" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="operativo">Operativos: máquina de anestesia, ventilador</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="oxigeno" name="oxigeno" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="oxigeno">Oxígeno</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="equip_intu" name="equip_intu" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="equip_intu">Equipo de intubación</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="aspiracion" name="aspiracion" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="aspiracion">Aspiración</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="farmacos" name="farmacos" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="farmacos">Fármacos</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="coche_paro" name="coche_paro" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="coche_paro">Coche de Paro</label></td>
+																		</tr>
+																		<tr>
+																			<td><input type="checkbox" value="1" id="equipo_rcp" name="equipo_rcp" class="segu_anestesica anestesia" disabled="disabled" checked="checked"></td>
+																			<td><label for="equipo_rcp">Equipo RCP</label></td>
+																		</tr>
+																	</tbody></table>
+																</td>
+															</tr>
+														</tbody></table>
+													</td>
+													<td width="50%" valign="top">
+														<table>
+															<tbody><tr>
+																<td><input type="checkbox" value="1" id="pulso" name="pulso" disabled="disabled" checked="checked" class="anestesia"></td>
+																<td><label for="pulso"><strong>PULSOXÍMETRO COLOCADO Y FUNCIONANDO</strong></label></td>
+															</tr>
+															<tr>
+																<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_alergias" name="padre_alergias" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
+																<td><label for="padre_alergias"><strong>ALERGIAS</strong></label></td>
+															</tr>
+															<tr>
 
-            function bloquearIncision() {
-                $("#grb_incision").click(function () {
-                    $('#incision input:checkbox,#incision input:radio,#incision input:text').attr('disabled', true);
-                    $('#confirm_verbal input:checkbox').attr('disabled', true);
-                    $('#prev_event input:checkbox').attr('disabled', true);
-                });
-            }
-            function bloquearQuirofano() {
-                $("#grb_quirofano").click(function () {
-                    $('#quirofano input:checkbox,#quirofano input:radio,#quirofano input:text').attr('disabled', true);
-                });
-            }
-            function bloquearRecuperacion() {
-                $("#grb_recuperacion").click(function () {
-                    $('#recuperacion input:checkbox,#recuperacion input:radio,#recuperacion input:text').attr('disabled', true);
-                    $('#confirm_estado input:checkbox').attr('disabled', true);
-                });
-            }
+																<td></td>
+																<td class="det_radio">
+																	<table cellpadding="0" cellspacing="0">
+																		<script>
+																			function disables() {
+	    //$('#mySelect1').disabled=true;
+	    $('#alerg_text_si').hide();
+	    $('#alerg_text_si').val('');
 
-            function valor_chk() {
-                var nombre;
-                $('#conf_antes').attr('checked', true);
-                $('#ident_pac').attr('checked', true);
-                $('#procedimiento').attr('checked', true);
-                $('#lugar_anato').attr('checked', true);
-                $('#consentimiento').attr('checked', true);
-                $("input:radio[name='demarcacion'][value='0']").attr('checked', true);
-                $('#segu_anestesica').attr('checked', true);
-                $('#pac_evaluado').attr('checked', true);
-                $('#operativo').attr('checked', true);
-                $('#oxigeno').attr('checked', true);
-                $('#equip_intu').attr('checked', true);
-                $('#aspiracion').attr('checked', true);
-                $('#farmacos').attr('checked', true);
-                $('#coche_paro').attr('checked', true);
-                $('#equipo_rcp').attr('checked', true);
-                $('#pulso').attr('checked', true);
-                $("input:radio[name='alergias'][value='1']").attr('checked', true);
-                $("input:radio[name='via_aerea'][value='1']").attr('checked', true);
-                $("input:radio[name='riesgo_hemo'][value='1']").attr('checked', true);
-                $("input:radio[name='dispo_sangre'][value='1']").attr('checked', true);
-                $("input:radio[name='dispo_equipo'][value='0']").attr('checked', true);
-                $('#presentacion').attr('checked', true);
-                $('#confirm_verbal').attr('checked', true);
-                $('#confirm_ident_pac').attr('checked', true);
-                $('#confirm_procedimiento').attr('checked', true);
-                $('#confirm_lugar_anato').attr('checked', true);
-                $('#confirm_posicion').attr('checked', true);
-                $('#confirm_equip').attr('checked', true);
-                $("input:radio[name='profilaxis'][value='1']").attr('checked', true);
-                $('#prev_event').attr('checked', true);
-                $('#prev_cirujano').attr('checked', true);
-                $('#prev_anest').attr('checked', true);
-                $('#prev_equip').attr('checked', true);
-                $("input:radio[name='imagenes'][value='1']").attr('checked', true);
-                $('#conf_nom_proc').attr('checked', true);
-                $('#rec_gasas').attr('checked', true);
-                $('#lectura_etiqueta').attr('checked', true);
-                $("input:radio[name='instrumental'][value='O']").attr('checked', true);
-                $('#test_escalas').attr('checked', true);
-                $('#confirm_estado').attr('checked', true);
-                $('#no_riesgos').attr('checked', true);
-                $('#vent_adecuada').attr('checked', true);
-                $('#no_necesidad_moni').attr('checked', true);
-                $('#recu_efectos').attr('checked', true);
-                $('#prob_postope').attr('checked', true);
-                $('#rev_riesgos_pot').attr('checked', true);
-                $('#tabla_seguridad input:radio').each(function (index, element) {
-                    if (nombre != $(this).attr('name')) {
-                        nombre = $(this).attr('name');
-                        if ($("input[name='" + nombre + "']:checked").val() != null) {
-                            $('#padre_' + nombre).attr('checked', true);
-                        }
-                    }
-                });
-            }
+	}
+	function enables() {
+	    //document.getElementById("mySelect1").disabled=false;
+	    $('#alerg_text_si').show();
+	}
+</script>
+<tbody><tr>
+	<td><input type="radio" id="alergias_1" name="alergias" value="1" onclick="enables()" disabled="disabled" checked="checked" class="r_anestesia"></td>
+	<td><label for="alergias_1">Si</label></td>
+	<td><input type="text" size="32" id="alerg_text_si" name="alerg_text_si" value="Alergias de" style="display: none;"></td> 
+</tr>
+<tr>
+	<td><input type="radio" id="alergias_0" name="alergias" value="0" onclick="disables()" disabled="disabled" class="r_anestesia"></td>
+	<td><label for="alergias_0">No</label></td>
+</tr>
+</tbody></table>
 
-        </script>		
-        <style type="text/css">
-            label{
-                cursor:pointer;
-                color:#000000;
-            }
-            .subtitulo{
-                border-bottom:#315287 solid 1px;
-            }
-            .etiqueta{
-                font-weight:bold;
-            }
-            .mensaje{
-                color:#f00;
-                font-weight:bold;
-                text-align:center;
-            }
-            .mensaje2{
-                color:#0C3;
-                font-weight:bold;
-                text-align:center;
-            }
-            .firma{
-                cursor:pointer
-            }
-        </style>
-    </head>	
-    <body>
-        <table width="700px" style="background-color:#F2F2F2;border:1px solid #000" align="center" id="tabla_seguridad">
-            <tbody><tr>
-                    <td class="titulo">LISTA DE VERIFICACION DE SEGURIDAD DE LA CIRUGIA</td>
-                </tr>
-                <tr>
-                    <td>
-                        <table width="100%">
-                            <tbody><tr>
-                                    <td class="etiqueta" width="80px">Paciente</td>
-                                    <td>PALOMINO NEYRA  AARON LUCA</td>
-                                    <td class="etiqueta" width="80px">NHC</td>
-                                    <td>0157660</td>
-                                </tr>
-                                <tr>
-                                    <td class="etiqueta" width="80px">Fecha</td>
-                                    <td>14/02/2018</td>
-                                </tr>
-                            </tbody></table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <form id="datos">
-                            <input type="hidden" name="tabla" id="tabla" value="">
-                                <input type="hidden" name="id_reg" value="18021408523125844411">
-                                    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
-                                        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-                                            <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#anestesia" id="ir_anestesia">Antes Anestesia</a></li>
-                                            <li class="ui-state-default ui-corner-top"><a href="#incision" id="ir_incision">Antes Incisión</a></li>
-                                            <li class="ui-state-default ui-corner-top"><a href="#quirofano" id="ir_quirofano">Antes Salida Quirófano</a></li>
-                                            <li class="ui-state-default ui-corner-top"><a href="#recuperacion" id="ir_recuperacion">Antes Salida Recuperación</a></li>
-                                        </ul>
-                                        <div id="anestesia" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-                                            <table width="100%" id="tabla_anestesia" class="tablas">
-                                                <tbody><tr id="mensaje_anestesia" class="mensaje2"></tr>
-                                                    <tr>
-                                                        <td>
-                                                            <table width="100%" cellpadding="0" cellspacing="0">
-                                                                <tbody><tr>
-                                                                        <td width="50%">
-                                                                            <table>
-                                                                                <tbody><tr>
-                                                                                        <td><input type="checkbox" value="1" id="conf_antes" name="conf_antes" class="anestesia"></td>
-                                                                                        <td><label for="conf_antes"><strong>SE HA CONFIRMADO</strong></label></td>
-                                                                                    </tr>	
-                                                                                    <tr>
-                                                                                        <td></td>
-                                                                                        <td id="det_conf_antes" class="det_chk">
-                                                                                            <table cellpadding="0" cellspacing="0" id="table">
-                                                                                                <tbody><tr id="tr">
-                                                                                                        <td id="">
-                                                                                                            <input type="checkbox" value="1" id="ident_pac" name="ident_pac" class="conf_antes anestesia" checked="checked"></td>
-                                                                                                        <td><label for="ident_pac">Identidad del paciente</label></td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td><input type="checkbox" value="1" id="procedimiento" name="procedimiento" class="conf_antes anestesia" checked="checked"></td>
-                                                                                                        <td><label for="procedimiento">El procedimiento</label></td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td><input type="checkbox" value="1" id="lugar_anato" name="lugar_anato" class="conf_antes anestesia" checked="checked"></td>
-                                                                                                        <td><label for="lugar_anato">Lugar anatómico</label></td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td><input type="checkbox" value="1" id="consentimiento" name="consentimiento" class="conf_antes anestesia" checked="checked"></td>
-                                                                                                        <td><label for="consentimiento">Consentimiento informado</label></td>
-                                                                                                    </tr>
+</td>
+</tr>
+<tr>
+	<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_via_aerea" name="padre_via_aerea" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
+	<td><label for="padre_via_aerea"><strong>VIA AÉREA DIFICIL/RIESGO DE ASPIRACIÓN</strong></label></td>
+</tr>
+<tr>
+	<td></td>
+	<td class="det_radio">
+		<table cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><input type="radio" id="via_aerea_1" name="via_aerea" value="1" disabled="disabled" checked="checked" class="r_anestesia"></td>
+				<td><label for="via_aerea_1">Si, Hay equipo y ayuda disponibles</label></td>
+			</tr>
+			<tr>
+				<td><input type="radio" id="via_aerea_0" name="via_aerea" value="0" disabled="disabled" class="r_anestesia"></td>
+				<td><label for="via_aerea_0">No</label></td>
+			</tr>
+		</tbody></table>
+	</td>
+</tr>
+<tr>
+	<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_riesgo_hemo" name="padre_riesgo_hemo" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
+	<td><label for="padre_riesgo_hemo"><strong>RIESGO DE HEMORRAGIA 500 ml (7ml/kg en niños)</strong></label></td>
+</tr>
+<tr>
+	<td></td>
+	<td class="det_radio">
+		<table cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><input type="radio" id="riesgo_hemo_1" name="riesgo_hemo" value="1" disabled="disabled" checked="checked" class="r_anestesia"></td>
+				<td><label for="riesgo_hemo_1">Si, y se ha tomado la previsión adecuada</label></td>
+			</tr>
+			<tr>
+				<td><input type="radio" id="riesgo_hemo_0" name="riesgo_hemo" value="0" disabled="disabled" class="r_anestesia"></td>
+				<td><label for="riesgo_hemo_0">No</label></td>
+			</tr>
+		</tbody></table>
+	</td>
+</tr>
+<tr>
+	<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_dispo_sangre" name="padre_dispo_sangre" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
+	<td><label for="padre_dispo_sangre"><strong>DISPONIBILIDAD DE SANGRE, PLASMA U OTROS FLUIDOS Y DOS VÍAS DE ACCESO (VP/CVC)</strong></label></td>
+</tr>
+<tr>
+	<td></td>
+	<td class="det_radio">
+		<table cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><input type="radio" id="dispo_sangre_1" name="dispo_sangre" value="1" disabled="disabled" checked="checked" class="r_anestesia"></td>
+				<td><label for="dispo_sangre_1">Si</label></td>
+			</tr>
+			<tr>
+				<td><input type="radio" id="dispo_sangre_0" name="dispo_sangre" value="0" disabled="disabled" class="r_anestesia"></td>
+				<td><label for="dispo_sangre_0">No</label></td>
+			</tr>
+		</tbody></table>
+	</td>
+</tr>
 
-                                                                                                </tbody></table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_demarcacion" name="padre_demarcacion" class="padre anestesia" disabled="disabled" hidden="" checked="checked"></td>
-                                                                                                    <td><label for="demarcacion"><strong>DEMARCACIÓN DE SITIO</strong></label></td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td></td>
-                                                                                                        <td class="det_radio">
-                                                                                                            <table cellpadding="0" cellspacing="0">
-                                                                                                                <tbody><tr>
-                                                                                                                        <td><input type="radio" id="demarcacion_1" name="demarcacion" value="1" class="r_anestesia"></td>
-                                                                                                                        <td><label for="demarcacion_1">Si</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="radio" id="demarcacion_0" name="demarcacion" value="0" checked="checked" class="r_anestesia"></td>
-                                                                                                                        <td><label for="demarcacion_0">No</label></td>
-                                                                                                                    </tr>
-                                                                                                                </tbody></table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td><input type="checkbox" value="1" id="segu_anestesica" name="segu_anestesica" checked="checked" class="anestesia"></td>
-                                                                                                        <td><label for="segu_anestesica"><strong>SEGURIDAD ANESTÉSICA COMPLETA</strong></label></td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td></td>
-                                                                                                        <td id="det_segu_anestesica" class="det_chk">
-                                                                                                            <table cellpadding="0" cellspacing="0">
-                                                                                                                <tbody><tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="pac_evaluado" name="pac_evaluado" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="pac_evaluado">Paciente evaluado</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="operativo" name="operativo" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="operativo">Operativos: máquina de anestesia, ventilador</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="oxigeno" name="oxigeno" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="oxigeno">Oxígeno</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="equip_intu" name="equip_intu" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="equip_intu">Equipo de intubación</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="aspiracion" name="aspiracion" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="aspiracion">Aspiración</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="farmacos" name="farmacos" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="farmacos">Fármacos</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="coche_paro" name="coche_paro" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="coche_paro">Coche de Paro</label></td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td><input type="checkbox" value="1" id="equipo_rcp" name="equipo_rcp" class="segu_anestesica anestesia" checked="checked"></td>
-                                                                                                                        <td><label for="equipo_rcp">Equipo RCP</label></td>
-                                                                                                                    </tr>
-                                                                                                                </tbody></table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    </tbody></table>
-                                                                                                    </td>
-                                                                                                    <td width="50%" valign="top">
-                                                                                                        <table>
-                                                                                                            <tbody><tr>
-                                                                                                                    <td><input type="checkbox" value="1" id="pulso" name="pulso" checked="checked" class="anestesia"></td>
-                                                                                                                    <td><label for="pulso"><strong>PULSOXÍMETRO COLOCADO Y FUNCIONANDO</strong></label></td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_alergias" name="padre_alergias" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
-                                                                                                                                <td><label for="padre_alergias"><strong>ALERGIAS</strong></label></td>
-                                                                                                                                </tr>
-                                                                                                                                <tr>
+<tr>
+	<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_dispo_equipo" name="padre_dispo_equipo" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
+	<td><label for="padre_dispo_equipo"><strong>DISPONIBILIDAD DE EQUIPO Y HERRAMIENTAS</strong></label></td>
+</tr>
+<tr>
+	<td></td>
+	<td class="det_radio">
+		<table cellpadding="0" cellspacing="0">
+			<script type="text/javascript">
+				function disableseq() {
+	    //$('#mySelect1').disabled=true;
+	    $('#dispo_equipo_text').hide();
+	    $('#dispo_equipo_text').val('');
 
-                                                                                                                                    <td></td>
-                                                                                                                                    <td class="det_radio">
-                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                            <script>
-                                                                                                                                                function disables() {
-                                                                                                                                                    //$('#mySelect1').disabled=true;
-                                                                                                                                                    $('#alerg_text_si').hide();
-                                                                                                                                                    $('#alerg_text_si').val('');
+	}
+	function enableseq() {
+	    //document.getElementById("mySelect1").disabled=false;
+	    $('#dispo_equipo_text').show();
+	}
+</script>
+<tbody><tr>
+	<td><input type="radio" id="dispo_equipo_1" name="dispo_equipo" value="1" onclick="disableseq()" disabled="disabled" checked="checked" class="r_anestesia"></td>
+	<td><label for="dispo_equipo_1">Si</label></td>
+</tr>
+<tr>
+	<td><input type="radio" id="dispo_equipo_0" name="dispo_equipo" value="0" onclick="enableseq()" disabled="disabled" class="r_anestesia"></td>
+	<td><label for="dispo_equipo_0">No</label></td>
+	<td><input type="text" size="32" id="dispo_equipo_text" name="dispo_equipo_text" value="" style="display: none;"></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
 
-                                                                                                                                                }
-                                                                                                                                                function enables() {
-                                                                                                                                                    //document.getElementById("mySelect1").disabled=false;
-                                                                                                                                                    $('#alerg_text_si').show();
-                                                                                                                                                }
-                                                                                                                                            </script>
-                                                                                                                                            <tbody><tr>
-                                                                                                                                                    <td><input type="radio" id="alergias_1" name="alergias" value="1" onclick="enables()" checked="checked" class="r_anestesia"></td>
-                                                                                                                                                    <td><label for="alergias_1">Si</label></td>
-                                                                                                                                                    <td><input type="text" size="32" id="alerg_text_si" name="alerg_text_si" value="Alergias de ..." style="display: none;"></td> 
-                                                                                                                                                </tr>
-                                                                                                                                                <tr>
-                                                                                                                                                    <td><input type="radio" id="alergias_0" name="alergias" value="0" onclick="disables()" class="r_anestesia"></td>
-                                                                                                                                                    <td><label for="alergias_0">No</label></td>
-                                                                                                                                                </tr>
-                                                                                                                                            </tbody></table>
+</tbody></table>
 
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                <tr>
-                                                                                                                                    <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_via_aerea" name="padre_via_aerea" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
-                                                                                                                                                <td><label for="padre_via_aerea"><strong>VIA AÉREA DIFICIL/RIESGO DE ASPIRACIÓN</strong></label></td>
-                                                                                                                                                </tr>
-                                                                                                                                                <tr>
-                                                                                                                                                    <td></td>
-                                                                                                                                                    <td class="det_radio">
-                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                            <tbody><tr>
-                                                                                                                                                                    <td><input type="radio" id="via_aerea_1" name="via_aerea" value="1" checked="checked" class="r_anestesia"></td>
-                                                                                                                                                                    <td><label for="via_aerea_1">Si, Hay equipo y ayuda disponibles</label></td>
-                                                                                                                                                                </tr>
-                                                                                                                                                                <tr>
-                                                                                                                                                                    <td><input type="radio" id="via_aerea_0" name="via_aerea" value="0" class="r_anestesia"></td>
-                                                                                                                                                                    <td><label for="via_aerea_0">No</label></td>
-                                                                                                                                                                </tr>
-                                                                                                                                                            </tbody></table>
-                                                                                                                                                    </td>
-                                                                                                                                                </tr>
-                                                                                                                                                <tr>
-                                                                                                                                                    <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_riesgo_hemo" name="padre_riesgo_hemo" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
-                                                                                                                                                                <td><label for="padre_riesgo_hemo"><strong>RIESGO DE HEMORRAGIA 500 ml (7ml/kg en niños)</strong></label></td>
-                                                                                                                                                                </tr>
-                                                                                                                                                                <tr>
-                                                                                                                                                                    <td></td>
-                                                                                                                                                                    <td class="det_radio">
-                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                            <tbody><tr>
-                                                                                                                                                                                    <td><input type="radio" id="riesgo_hemo_1" name="riesgo_hemo" value="1" checked="checked" class="r_anestesia"></td>
-                                                                                                                                                                                    <td><label for="riesgo_hemo_1">Si, y se ha tomado la previsión adecuada</label></td>
-                                                                                                                                                                                </tr>
-                                                                                                                                                                                <tr>
-                                                                                                                                                                                    <td><input type="radio" id="riesgo_hemo_0" name="riesgo_hemo" value="0" class="r_anestesia"></td>
-                                                                                                                                                                                    <td><label for="riesgo_hemo_0">No</label></td>
-                                                                                                                                                                                </tr>
-                                                                                                                                                                            </tbody></table>
-                                                                                                                                                                    </td>
-                                                                                                                                                                </tr>
-                                                                                                                                                                <tr>
-                                                                                                                                                                    <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_dispo_sangre" name="padre_dispo_sangre" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
-                                                                                                                                                                                <td><label for="padre_dispo_sangre"><strong>DISPONIBILIDAD DE SANGRE, PLASMA U OTROS FLUIDOS Y DOS VÍAS DE ACCESO (VP/CVC)</strong></label></td>
-                                                                                                                                                                                </tr>
-                                                                                                                                                                                <tr>
-                                                                                                                                                                                    <td></td>
-                                                                                                                                                                                    <td class="det_radio">
-                                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                                            <tbody><tr>
-                                                                                                                                                                                                    <td><input type="radio" id="dispo_sangre_1" name="dispo_sangre" value="1" checked="checked" class="r_anestesia"></td>
-                                                                                                                                                                                                    <td><label for="dispo_sangre_1">Si</label></td>
-                                                                                                                                                                                                </tr>
-                                                                                                                                                                                                <tr>
-                                                                                                                                                                                                    <td><input type="radio" id="dispo_sangre_0" name="dispo_sangre" value="0" class="r_anestesia"></td>
-                                                                                                                                                                                                    <td><label for="dispo_sangre_0">No</label></td>
-                                                                                                                                                                                                </tr>
-                                                                                                                                                                                            </tbody></table>
-                                                                                                                                                                                    </td>
-                                                                                                                                                                                </tr>
+</td>
+</tr>
 
-                                                                                                                                                                                <tr>
-                                                                                                                                                                                    <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_dispo_equipo" name="padre_dispo_equipo" class="padre anestesia" disabled="" hidden="" checked="checked"></td>
-                                                                                                                                                                                                <td><label for="padre_dispo_equipo"><strong>DISPONIBILIDAD DE EQUIPO Y HERRAMIENTAS</strong></label></td>
-                                                                                                                                                                                                </tr>
-                                                                                                                                                                                                <tr>
-                                                                                                                                                                                                    <td></td>
-                                                                                                                                                                                                    <td class="det_radio">
-                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <script type="text/javascript">
-                                                                                                                                                                                                        function disableseq() {
-                                                                                                                                                                                                        //$('#mySelect1').disabled=true;
-                                                                                                                                                                                                        $('#dispo_equipo_text').hide();
-                                                                                                                                                                                                        $('#dispo_equipo_text').val('');
-
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        function enableseq() {
-                                                                                                                                                                                                        //document.getElementById("mySelect1").disabled=false;
-                                                                                                                                                                                                        $('#dispo_equipo_text').show();
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        </script>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="radio" id="dispo_equipo_1" name="dispo_equipo" value="1" onclick="disableseq()" class="r_anestesia"></td>
-                                                                                                                                                                                                        <td><label for="dispo_equipo_1">Si</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="radio" id="dispo_equipo_0" name="dispo_equipo" value="0" onclick="enableseq()" checked="checked" class="r_anestesia"></td>
-                                                                                                                                                                                                        <td><label for="dispo_equipo_0">No</label></td>
-                                                                                                                                                                                                        <td><input type="text" size="32" id="dispo_equipo_text" name="dispo_equipo_text" value="" style="display: none;"></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                    </td>
-                                                                                                                                                                                                </tr>
-                                                                                                                                                                                                </tbody></table>
-                                                                                                                                                                                                </td>
-                                                                                                                                                                                                </tr>
-
-                                                                                                                                                                                                </tbody></table>
-
-                                                                                                                                                                                                </td>
-                                                                                                                                                                                                </tr>
-
-                                                                                                                                                                                                <tr>
-                                                                                                                                                                                                    <td align="center"><input type="button" id="grb_anestesia" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all" onclick="bloquearAnestesia()" style="display: inline-block;" role="button" aria-disabled="false"></td>
-                                                                                                                                                                                                </tr>
-                                                                                                                                                                                                </tbody></table>
-                                                                                                                                                                                                </div>
+<tr>
 
 
+	<td align="center"><input type="button" id="grb_anestesia" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all ui-button-disabled ui-state-disabled" onclick="bloquearAnestesia()" disabled="" style="" role="button" aria-disabled="true"></td>
+</tr>
 
-                                                                                                                                                                                                <div id="incision" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-                                                                                                                                                                                                    <table width="100%" id="tabla_incision" class="tablas">
-                                                                                                                                                                                                        <tbody><tr id="mensaje_incision" class="mensaje2">El formulario ha sido habilitado</tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <table width="100%" cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td width="50%">
-                                                                                                                                                                                                        <table>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="presentacion" name="presentacion" checked="checked" class="incision"></td>
-                                                                                                                                                                                                        <td><label for="presentacion"><strong>CONFIRMACIÓN por nombre y función de los miembros del equipo quirúrgico completo</strong></label></td>
-                                                                                                                                                                                                        </tr>	
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="confirm_verbal" name="confirm_verbal" checked="checked" class="incision"></td>
-                                                                                                                                                                                                        <td><label for="confirm_verbal"><strong>CONFIRMACIÓN verbal por el cirujano, anestesiologo y enfermero de:</strong></label></td>
-                                                                                                                                                                                                        </tr>	
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td></td>
-                                                                                                                                                                                                        <td id="det_confirm_verbal" class="det_chk">
-                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="confirm_ident_pac" name="confirm_ident_pac" class="confirm_verbal incision" checked="checked"></td>
-                                                                                                                                                                                                        <td><label for="confirm_ident_pac">Identidad del paciente</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="confirm_procedimiento" name="confirm_procedimiento" class="confirm_verbal incision" checked="checked"></td>
-                                                                                                                                                                                                        <td><label for="confirm_procedimiento">Procedimiento</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="confirm_lugar_anato" name="confirm_lugar_anato" class="confirm_verbal incision" checked="checked"></td>
-                                                                                                                                                                                                        <td><label for="confirm_lugar_anato">Lugar anatómico</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="confirm_posicion" name="confirm_posicion" class="confirm_verbal incision" checked="checked"></td>
-                                                                                                                                                                                                        <td><label for="confirm_posicion">Posición correcta del paciente</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
+</tbody></table>
 
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="confirm_equip" name="confirm_equip" checked="checked" class="incision"></td>
-                                                                                                                                                                                                        <td><label for="confirm_equip"><strong>CONFIRMAR si todos los miembros del Equipo Han cumplido correctamente con el protocolo de asepsia quirúrgica</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td></td>
-                                                                                                                                                                                                        </tr>
 
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_profilaxis" name="padre_profilaxis" class="padre bloq incision" hidden="" checked="checked" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="padre_profilaxis"><strong>PROFILAXIS ANTIBIÓTICA en los últimos 60 minutos</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td></td>
-                                                                                                                                                                                                        <td class="det_radio">
-                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <script>
-                                                                                                                                                                                                        function disable() {
-                                                                                                                                                                                                        //$('#mySelect1').disabled=true;
-                                                                                                                                                                                                        $('#profil_text_si').hide();
-                                                                                                                                                                                                        $('#profil_text_si').val('');
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        function enable() {
-                                                                                                                                                                                                        //document.getElementById("mySelect1").disabled=false;
-                                                                                                                                                                                                        $('#profil_text_si').show();
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        </script>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="radio" id="profilaxis_1" name="profilaxis" value="1" onclick="enable()" checked="checked" class="r_incision"></td>
-                                                                                                                                                                                                        <td><label for="profilaxis_1">Si</label></td>
-                                                                                                                                                                                                        <td><input type="text" size="30" id="profil_text_si" name="profil_text_si" value="sadfsfsgf" disabled="disabled" style="display: none;"> </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="radio" id="profilaxis_0" name="profilaxis" value="0" onclick="disable()" class="r_incision"></td>
-                                                                                                                                                                                                        <td><label for="profilaxis_0">No</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td width="50%" valign="top">
-                                                                                                                                                                                                        <table>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="prev_event" name="prev_event" checked="checked" class="incision"></td>
-                                                                                                                                                                                                        <td><label for="prev_event"><strong>PREVISIÓN DE EVENTOS CRÍTICOS</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td></td>
-                                                                                                                                                                                                        <td id="det_prev_event" class="det_chk">
-                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0"> 
-                                                                                                                                                                                                        <tbody><tr><td><input type="checkbox" value="1" id="prev_cirujano" name="prev_cirujano" class="prev_event incision" checked="checked"></td>
-                                                                                                                                                                                                        <td><label for="prev_cirujano">Cirujano: pasos críticos y equipo necesario, tiempo operatorio previsto, pérdida de sangre prevista</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="prev_anest" name="prev_anest" class="prev_event incision" checked="checked"></td>
-                                                                                                                                                                                                        <td><label for="prev_anest">Anestesiólogo: problemas y riesgos anestésicos, comorbilidades personalizados</label></td>
-
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr><td><input type="checkbox" value="1" id="prev_equip" name="prev_equip" class="prev_event incision" checked="checked"></td>
-                                                                                                                                                                                                        <td><label for="prev_equip">Equipo de enfermería: confirma esterilidad.<br>
-                                                                                                                                                                                                        presenta problemas y dudas</label></td>
-
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_imagenes" name="padre_imagenes" class="padre bloq incision" hidden="" checked="checked" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="padre_imagenes"><strong>PUEDE VISUALIZAR IMÁGENES DIAGNÓSTICAS</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td></td>
-                                                                                                                                                                                                        <td class="det_radio">
-                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="radio" id="imagenes_1" name="imagenes" value="1" checked="checked" class="r_incision"></td>
-                                                                                                                                                                                                        <td><label for="imagenes_1">Si</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="radio" id="imagenes_0" name="imagenes" value="0" class="r_incision"></td>
-                                                                                                                                                                                                        <td><label for="imagenes_0">No</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td align="center"><input type="button" id="grb_incision" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all" onclick="bloquearIncision()" style="" role="button" aria-disabled="false"></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </div>
+</div>
 
 
 
-                                                                                                                                                                                                        <div id="quirofano" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-                                                                                                                                                                                                        <table width="100%" id="tabla_quirofano" class="tablas">
-                                                                                                                                                                                                        <tbody><tr id="mensaje_quirofano" class="mensaje2">El formulario ha sido completado</tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <table width="100%" cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td width="50%">
-                                                                                                                                                                                                        <table>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="conf_nom_proc" name="conf_nom_proc" checked="checked" class="quirofano" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="conf_nom_proc"><strong>Se confirma el NOMBRE DEL PROCEDIMIENTO</strong></label></td>
-                                                                                                                                                                                                        </tr>	
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="rec_gasas" name="rec_gasas" checked="checked" class="quirofano" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="rec_gasas"><strong>RECUENTO completo de gasas, agujas e instrumentos</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="lectura_etiqueta" name="lectura_etiqueta" checked="checked" class="quirofano" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="lectura_etiqueta"><strong>Lectura de la ETIQUETA DE LA MUESTRA anatomopatológica (en voz alta incluido el nombre del paciente)</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td width="50%" valign="top">
-                                                                                                                                                                                                        <table>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_instrumental" name="padre_instrumental" class="padre bloq quirofano" hidden="" checked="checked" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="padre_instrumental"><strong>INSTRUMENTAL Y EQUIPOS durante la cirugía:</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td></td>
-                                                                                                                                                                                                        <td class="det_radio">
-                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <script type="text/javascript">
-                                                                                                                                                                                                        function disablesinst() {
-                                                                                                                                                                                                        //$('#mySelect1').disabled=true;
-                                                                                                                                                                                                        $('#instru_prob_text').hide();
-                                                                                                                                                                                                        $('#instru_prob_text').val('');
+<div id="incision" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
 
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        function enablesinst() {
-                                                                                                                                                                                                        //document.getElementById("mySelect1").disabled=false;
-                                                                                                                                                                                                        $('#instru_prob_text').show();
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                        </script>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="radio" id="instrumental_o" name="instrumental" value="O" onclick="disablesinst()" checked="checked" class="r_quirofano" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="instrumental_o">Operativos</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="radio" id="instrumental_p" name="instrumental" value="P" onclick="enablesinst()" class="r_quirofano" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="instrumental_p">Con problemas</label></td>
-                                                                                                                                                                                                        <td><input type="text" size="32" id="instru_prob_text" name="instru_prob_text" value="" disabled="disabled" style="display: none;"></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td align="center">
-                                                                                                                                                                                                        <img src="images/nueva_firma.png"  alt="" width="150" height="100" class="firma">
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td align="center">
-                                                                                                                                                                                                        <img src="images/nueva_firma.png"  alt="" width="150" height="100" class="firma">
-                                                                                                                                                                                                        </td>
+	
+	<table width="100%" id="tabla_incision" class="tablas">
 
-                                                                                                                                                                                                        </tr>
+		<tbody><tr id="mensaje_incision" class="mensaje2">El formulario ha sido completado</tr>
+		<tr>
+			<td>
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tbody><tr>
+						<td width="50%">
+							<table>
+								<tbody><tr>
+									<td><input type="checkbox" value="1" id="presentacion" name="presentacion" checked="checked" class="incision"></td>
+									<td><label for="presentacion"><strong>CONFIRMACIÓN por nombre y función de los miembros del equipo quirúrgico completo</strong></label></td>
+								</tr>	
+								<tr>
+									<td><input type="checkbox" value="1" id="confirm_verbal" name="confirm_verbal" checked="checked" class="incision"></td>
+									<td><label for="confirm_verbal"><strong>CONFIRMACIÓN verbal por el cirujano, anestesiologo y enfermero de:</strong></label></td>
+								</tr>	
+								<tr>
+									<td></td>
+									<td id="det_confirm_verbal" class="det_chk">
+										<table cellpadding="0" cellspacing="0">
+											<tbody><tr>
+												<td><input type="checkbox" value="1" id="confirm_ident_pac" name="confirm_ident_pac" class="confirm_verbal incision" checked="checked"></td>
+												<td><label for="confirm_ident_pac">Identidad del paciente</label></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" value="1" id="confirm_procedimiento" name="confirm_procedimiento" class="confirm_verbal incision" checked="checked"></td>
+												<td><label for="confirm_procedimiento">Procedimiento</label></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" value="1" id="confirm_lugar_anato" name="confirm_lugar_anato" class="confirm_verbal incision" checked="checked"></td>
+												<td><label for="confirm_lugar_anato">Lugar anatómico</label></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" value="1" id="confirm_posicion" name="confirm_posicion" class="confirm_verbal incision" checked="checked"></td>
+												<td><label for="confirm_posicion">Posición correcta del paciente</label></td>
+											</tr>
+										</tbody></table>
+									</td>
+								</tr>
 
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td class="etiqueta" align="center">
-                                                                                                                                                                                                        Firma CIRUJANO
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td class="etiqueta" align="center">
-                                                                                                                                                                                                        Firma ANESTESIÓLOGO
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td align="center">
-                                                                                                                                                                                                        <img src="images/nueva_firma.png"  alt="" width="150" height="100" class="firma">
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td align="center">
-                                                                                                                                                                                                        <img src="images/nueva_firma.png"  alt="" width="150" height="100" class="firma">
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td class="etiqueta" align="center">
-                                                                                                                                                                                                        Firma ENFERMERO
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td class="etiqueta" align="center">
-                                                                                                                                                                                                        Firma VERIFICADOR
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td align="center"><input type="button" id="grb_quirofano" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all" onclick="bloquearQuirofano()" style="" role="button" aria-disabled="false"></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        <div id="recuperacion" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
-                                                                                                                                                                                                        <table width="100%" id="tabla_recuperacion" class="tablas">
-                                                                                                                                                                                                        <tbody><tr id="mensaje_recuperacion" class="mensaje2">El formulario ha sido completado</tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td>
-                                                                                                                                                                                                        <table width="100%" cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td width="50%">
-                                                                                                                                                                                                        <table>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="test_escalas" name="test_escalas" checked="checked" class="recuperacion" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="test_escalas"><strong>Test / Escalas de evaluación con puntajes aceptables</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="confirm_estado" name="confirm_estado" checked="checked" class="recuperacion" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="confirm_estado"><strong>Confirmación de estado clínico estable del paciente</strong></label></td>
-                                                                                                                                                                                                        </tr>	
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td></td>
-                                                                                                                                                                                                        <td id="det_confirm_estado" class="det_chk">
-                                                                                                                                                                                                        <table cellpadding="0" cellspacing="0">
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="no_riesgos" name="no_riesgos" class="confirm_estado recuperacion" checked="checked" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="no_riesgos">No riesgos hemodinámicos</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="vent_adecuada" name="vent_adecuada" class="confirm_estado recuperacion" checked="checked" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="vent_adecuada">Ventilación adecuada</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="no_necesidad_moni" name="no_necesidad_moni" class="confirm_estado recuperacion" checked="checked" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="no_necesidad_moni">No Necesidad de monitoreo ni apoyo de enfermería permanente</label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td width="50%" valign="top">
-                                                                                                                                                                                                        <table>
-                                                                                                                                                                                                        <tbody><tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="recu_efectos" name="recu_efectos" checked="checked" class="recuperacion" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="recu_efectos"><strong>Recuperación de efectos anestésicos</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="prob_postope" name="prob_postope" checked="checked" class="recuperacion" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="prob_postope"><strong>Problemas postoperatorios y dolor controlados</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td><input type="checkbox" value="1" id="rev_riesgos_pot" name="rev_riesgos_pot" checked="checked" class="recuperacion" disabled="disabled"></td>
-                                                                                                                                                                                                        <td><label for="mmm"><strong>Revisión de riesgos potenciales y medidas a tomarse en hospitalización / domicilio</strong></label></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td align="center">
-                                                                                                                                                                                                        <img src="images/nueva_firma.png"  alt="" width="150" height="100" class="firma">
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td align="center">
-                                                                                                                                                                                                        <img src="images/nueva_firma.png"  alt="" width="150" height="100" class="firma">
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td class="etiqueta" align="center">
-                                                                                                                                                                                                        Firma ANESTESIÓLOGO
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        <td class="etiqueta" align="center">
-                                                                                                                                                                                                        Firma ENFERMERO
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td align="center"><input type="button" id="grb_recuperacion" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all" onclick="bloquearRecuperacion()" style="" role="button" aria-disabled="false"></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody></table>
+								<tr>
+									<td><input type="checkbox" value="1" id="confirm_equip" name="confirm_equip" checked="checked" class="incision"></td>
+									<td><label for="confirm_equip"><strong>CONFIRMAR si todos los miembros del Equipo Han cumplido correctamente con el protocolo de asepsia quirúrgica</strong></label></td>
+								</tr>
+								<tr>
+									<td></td>
+								</tr>
 
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                        </form>
-                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        <tr>
-                                                                                                                                                                                                        <td align="center"><input type="button" id="imprimir" value="Imprimir" style="display: inline-block;" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"></td>
-                                                                                                                                                                                                        </tr>
-                                                                                                                                                                                                        </tbody>
-                                                                                                                                                                                                        </table>
-                                                                                                                                                                                                        </body>
-                                                                                                                                                                                                        </html>
+								<tr>
+									<td><img align="right" src="../../images/punto.png" height="14" width="15">
+										<input type="checkbox" value="1" id="padre_profilaxis" name="padre_profilaxis" class="padre bloq incision" hidden="" checked="checked" disabled="disabled"></td>
+									<td><label for="padre_profilaxis"><strong>PROFILAXIS ANTIBIÓTICA en los últimos 60 minutos</strong></label></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="det_radio">
+										<table cellpadding="0" cellspacing="0">
+											<script>
+												function disable() {
+	   //$('#mySelect1').disabled=true;
+	   $('#profil_text_si').hide();
+	   $('#profil_text_si').val('');
+	}
+	function enable() {
+	    //document.getElementById("mySelect1").disabled=false;
+	    $('#profil_text_si').show();
+	}
+</script>
+<tbody><tr>
+	<td><input type="radio" id="profilaxis_1" name="profilaxis" value="1" onclick="enable()" checked="checked" class="r_incision"></td>
+	<td><label for="profilaxis_1">Si</label></td>
+	<td><input type="text" size="30" id="profil_text_si" name="profil_text_si" value="hasjhso" style="display: none;"> </td>
+</tr>
+<tr>
+	<td><input type="radio" id="profilaxis_0" name="profilaxis" value="0" onclick="disable()" class="r_incision"></td>
+	<td><label for="profilaxis_0">No</label></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+<td width="50%" valign="top">
+	<table>
+		<tbody><tr>
+			<td><input type="checkbox" value="1" id="prev_event" name="prev_event" checked="checked" class="incision"></td>
+			<td><label for="prev_event"><strong>PREVISIÓN DE EVENTOS CRÍTICOS</strong></label></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="det_prev_event" class="det_chk">
+				<table cellpadding="0" cellspacing="0"> 
+	        <tbody><tr><td><input type="checkbox" value="1" id="prev_cirujano" name="prev_cirujano" class="prev_event incision" checked="checked"></td>
+	        <td><label for="prev_cirujano">Cirujano: pasos críticos y equipo necesario, tiempo operatorio previsto, pérdida de sangre prevista</label></td>
+	    </tr>
+	<tr>
+
+		<td><input type="checkbox" value="1" id="prev_anest" name="prev_anest" class="prev_event incision" checked="checked"></td>
+		<td><label for="prev_anest">Anestesiólogo: problemas y riesgos anestésicos, comorbilidades personalizados</label></td>
+
+	</tr>
+	<tr><td><input type="checkbox" value="1" id="prev_equip" name="prev_equip" class="prev_event incision" checked="checked"></td>
+	<td><label for="prev_equip">Equipo de enfermería: confirma esterilidad.<br>
+	presenta problemas y dudas</label></td>
+
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+	<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_imagenes" name="padre_imagenes" class="padre bloq incision" hidden="" checked="checked" disabled="disabled"></td>
+	<td><label for="padre_imagenes"><strong>PUEDE VISUALIZAR IMÁGENES DIAGNÓSTICAS</strong></label></td>
+</tr>
+<tr>
+	<td></td>
+	<td class="det_radio">
+		<table cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td><input type="radio" id="imagenes_1" name="imagenes" value="1" checked="checked" class="r_incision"></td>
+				<td><label for="imagenes_1">Si</label></td>
+			</tr>
+			<tr>
+				<td><input type="radio" id="imagenes_0" name="imagenes" value="0" class="r_incision"></td>
+				<td><label for="imagenes_0">No</label></td>
+			</tr>
+		</tbody></table>
+	</td>
+</tr>
+
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+	
+	<td align="center"><input type="button" id="grb_incision" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all ui-button-disabled ui-state-disabled" onclick="bloquearIncision()" style="" disabled="" role="button" aria-disabled="true"></td>
+</tr>
+</tbody></table>
+
+</div>
+
+
+
+<div id="quirofano" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+
+
+	<table width="100%" id="tabla_quirofano" class="tablas">
+		<tbody><tr id="mensaje_quirofano" class="mensaje2">El formulario ha sido completado</tr>
+		<tr>
+			<td>
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tbody><tr>
+						<td width="50%">
+							<table>
+								<tbody><tr>
+									<td><input type="checkbox" value="1" id="conf_nom_proc" name="conf_nom_proc" checked="checked" class="quirofano"></td>
+									<td><label for="conf_nom_proc"><strong>Se confirma el NOMBRE DEL PROCEDIMIENTO</strong></label></td>
+								</tr>	
+								<tr>
+									<td><input type="checkbox" value="1" id="rec_gasas" name="rec_gasas" checked="checked" class="quirofano"></td>
+									<td><label for="rec_gasas"><strong>RECUENTO completo de gasas, agujas e instrumentos</strong></label></td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" value="1" id="lectura_etiqueta" name="lectura_etiqueta" checked="checked" class="quirofano"></td>
+									<td><label for="lectura_etiqueta"><strong>Lectura de la ETIQUETA DE LA MUESTRA anatomopatológica (en voz alta incluido el nombre del paciente)</strong></label></td>
+								</tr>
+							</tbody></table>
+						</td>
+						<td width="50%" valign="top">
+							<table>
+								<tbody><tr>
+									<td><img align="right" src="../../images/punto.png" height="14" width="15"><input type="checkbox" value="1" id="padre_instrumental" name="padre_instrumental" class="padre bloq quirofano" hidden="" checked="checked" disabled="disabled"></td>
+									<td><label for="padre_instrumental"><strong>INSTRUMENTAL Y EQUIPOS durante la cirugía:</strong></label></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="det_radio">
+										<table cellpadding="0" cellspacing="0">
+											<script type="text/javascript">
+												function disablesinst() {
+	    //$('#mySelect1').disabled=true;
+	    $('#instru_prob_text').hide();
+	    $('#instru_prob_text').val('');
+
+	}
+	function enablesinst() {
+	    //document.getElementById("mySelect1").disabled=false;
+	    $('#instru_prob_text').show();
+	}
+</script>
+<tbody><tr>
+	<td><input type="radio" id="instrumental_o" name="instrumental" value="O" onclick="disablesinst()" checked="checked" class="r_quirofano"></td>
+	<td><label for="instrumental_o">Operativos</label></td>
+</tr>
+<tr>
+	<td><input type="radio" id="instrumental_p" name="instrumental" value="P" onclick="enablesinst()" class="r_quirofano"></td>
+	<td><label for="instrumental_p">Con problemas</label></td>
+	<td><input type="text" size="32" id="instru_prob_text" name="instru_prob_text" value="" style="display: none;"></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+	<td align="center">
+		<img src="../../firmas/1133803764231.jpg" id="cirujano" alt="" width="150" height="100" class="firma">
+	</td>
+	<td align="center">
+		<img src="../../firmas/1517929193481.jpg" id="anest_quiro" alt="" width="150" height="100" class="firma">
+	</td>
+</tr>
+<tr>
+	<td class="etiqueta" align="center">
+		Firma CIRUJANO
+	</td>
+	<td class="etiqueta" align="center">
+		Firma ANESTESIÓLOGO
+	</td>
+</tr>
+<tr>
+	<td align="center">
+		<img src="../../firmas/1517929193481.jpg" id="enfermero_quiro" alt="" width="150" height="100" class="firma">
+	</td>
+	<td align="center">
+		<img src="../../firmas/1517929193481.jpg" id="verificador" alt="" width="150" height="100" class="firma">
+	</td>
+</tr>
+<tr>
+	<td class="etiqueta" align="center">
+		Firma ENFERMERO
+	</td>
+	<td class="etiqueta" align="center">
+		Firma VERIFICADOR
+	</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+	
+<td align="center"><input type="button" id="grb_quirofano" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all ui-button-disabled ui-state-disabled" onclick="bloquearQuirofano()" style="" disabled="" role="button" aria-disabled="true"></td>
+		
+</tr>
+</tbody></table>
+
+</div>
+<div id="recuperacion" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+		
+<table width="100%" id="tabla_recuperacion" class="tablas">
+		<tbody><tr id="mensaje_recuperacion" class="mensaje2">El formulario ha sido completado</tr>
+		<tr>
+			<td>
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tbody><tr>
+						<td width="50%">
+							<table>
+								<tbody><tr>
+									<td><input type="checkbox" value="1" id="test_escalas" name="test_escalas" checked="checked" class="recuperacion"></td>
+									<td><label for="test_escalas"><strong>Test / Escalas de evaluación con puntajes aceptables</strong></label></td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" value="1" id="confirm_estado" name="confirm_estado" checked="checked" class="recuperacion"></td>
+									<td><label for="confirm_estado"><strong>Confirmación de estado clínico estable del paciente</strong></label></td>
+								</tr>	
+								<tr>
+									<td></td>
+									<td id="det_confirm_estado" class="det_chk">
+										<table cellpadding="0" cellspacing="0">
+											<tbody><tr>
+												<td><input type="checkbox" value="1" id="no_riesgos" name="no_riesgos" class="confirm_estado recuperacion" checked="checked"></td>
+												<td><label for="no_riesgos">No riesgos hemodinámicos</label></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" value="1" id="vent_adecuada" name="vent_adecuada" class="confirm_estado recuperacion" checked="checked"></td>
+												<td><label for="vent_adecuada">Ventilación adecuada</label></td>
+											</tr>
+											<tr>
+												<td><input type="checkbox" value="1" id="no_necesidad_moni" name="no_necesidad_moni" class="confirm_estado recuperacion" checked="checked"></td>
+												<td><label for="no_necesidad_moni">No Necesidad de monitoreo ni apoyo de enfermería permanente</label></td>
+											</tr>
+										</tbody></table>
+									</td>
+								</tr>
+							</tbody></table>
+						</td>
+						<td width="50%" valign="top">
+							<table>
+								<tbody><tr>
+									<td><input type="checkbox" value="1" id="recu_efectos" name="recu_efectos" checked="checked" class="recuperacion"></td>
+									<td><label for="recu_efectos"><strong>Recuperación de efectos anestésicos</strong></label></td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" value="1" id="prob_postope" name="prob_postope" checked="checked" class="recuperacion"></td>
+									<td><label for="prob_postope"><strong>Problemas postoperatorios y dolor controlados</strong></label></td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" value="1" id="rev_riesgos_pot" name="rev_riesgos_pot" checked="checked" class="recuperacion"></td>
+									<td><label for="mmm"><strong>Revisión de riesgos potenciales y medidas a tomarse en hospitalización / domicilio</strong></label></td>
+								</tr>
+							</tbody></table>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<img src="../../images/nueva_firma.png" id="anest_post" alt="" width="150" height="100" class="firma">
+						</td>
+						<td align="center">
+							<img src="../../images/nueva_firma.png" id="enfermero_post" alt="" width="150" height="100" class="firma">
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta" align="center">
+							Firma ANESTESIÓLOGO
+						</td>
+						<td class="etiqueta" align="center">
+							Firma ENFERMERO
+						</td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+		<tr>
+		
+	<td align="center"><input type="button" id="grb_recuperacion" value="Grabar" class="grabar ui-button ui-widget ui-state-default ui-corner-all" onclick="bloquearRecuperacion()" style="" role="button" aria-disabled="false"></td>
+			
+
+		</tr>
+	</tbody></table>
+
+		
+</div>
+
+</div>
+</form>
+</td>
+</tr>
+<tr>
+	<td align="center"><input type="button" id="imprimir" value="Imprimir" style="" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"></td>
+</tr>
+</tbody></table>
+
+
+
+
+
+
+</body></html>
